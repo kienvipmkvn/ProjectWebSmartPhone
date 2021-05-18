@@ -1,0 +1,28 @@
+Lấy danh sách user:
+	method : GET
+	url:../btlweb2/api/user.php
+	vd :../btlweb2/api/user.php?Name=adm
+thêm user:
+	[POST] ../btlweb2/api/user.php
+	post fields body : json :
+		{
+			"Name":"Name",
+			"Username":"username",
+			"Password":"pass",
+			"Email":"email@gmail.com",
+			"Phone":"0123456789",
+			"Role":1 
+		}// với admin có role =1; với user có role =0;
+sửa user:
+	[PUT] ../btlweb2/api/user.php?id=$id
+	post fields body : json :
+		{
+			"Name":"newName",
+			"Username":"newusername",
+			"Password":"newpass",
+			"Email":"newemail@gmail.com",
+			"Phone":"456789012",
+			"Role":0 
+		}// với admin có role =1; với user có role =0;
+xóa user:
+	[DELETE] ../btlweb2/api/user.php?id=$id			
