@@ -35,6 +35,8 @@ header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE");
         public function getuser(){
             $str = parse_url($_SERVER['REQUEST_URI'],PHP_URL_QUERY);
             parse_str($str, $output);
+            $params=array_change_key_case($output, CASE_UPPER);
+            $output[]=$params;
             
             $userlist=$this->controller->getUserList($output);
             foreach ($userlist as $user){
@@ -52,6 +54,8 @@ header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE");
         public function deleteuser(){
             $str = parse_url($_SERVER['REQUEST_URI'],PHP_URL_QUERY);
             parse_str($str, $params);
+            $params=array_change_key_case($params, CASE_UPPER);
+            
             echo json_encode($this->controller->deleteUser($params["ID"]),JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
             
         }
@@ -60,6 +64,8 @@ header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE");
             $str = parse_url($_SERVER['REQUEST_URI'],PHP_URL_QUERY);
             parse_str($str, $params);
             $input = json_decode(file_get_contents('php://input'),true);
+            $params=array_change_key_case($params, CASE_UPPER);
+            
             echo json_encode($this->controller->editUser($params["ID"],$input),JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE );
         }
         
