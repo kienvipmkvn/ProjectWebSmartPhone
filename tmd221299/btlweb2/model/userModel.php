@@ -13,7 +13,6 @@ class userModel extends DB{
         foreach ($data as $key => $value){
             $this->$key = $value;
         }
-       // $this->Role=(int)$this->Role;
         $this->connect();
     }
     public function getuser(){
@@ -35,13 +34,12 @@ class userModel extends DB{
         $where ="";
         $user=new userModel($data);
         $data=$user->getuser();
-        //print_r($data);
+        
         foreach ($data as $key => $value ){
-            if(!strcmp($value,""))  //echo json_encode(["messenger"=>"thêm user thất bại"]);
+            if(!strcmp($value,""))  
                 unset($data[$key]);
         }
-       // print_r($data);
-       // echo isset($data["ID"]);
+        
         if(!empty($data)){
             $where = "WHERE ";
             if(isset($data["ID"]))
@@ -58,15 +56,11 @@ class userModel extends DB{
                 $where=$where."Address LIKE \"%".$data["Address"]."%\"";
 
         }
-        //  echo $where;
-        //print_r($data); echo $where;
+        
         $userlist = $this->SeclectData("user",$colum,$where);
-        //print_r($userlist);
         foreach ($userlist as $user){
             $users[] = new userModel($user);
         }
-        
-        //echo json_encode($this->data,JSON_PRETTY_PRINT);
         return $users ;
     
     }
@@ -74,13 +68,14 @@ class userModel extends DB{
     public function insertUser(){
         $user=$this->getuser();
         unset($user["ID"]);
-        //print_r($user);
+        
         if(!isset($this->Address)) unset($user["Address"]);
         if(!$this->Role) unset($user["Role"]);
         foreach ($user as $key => $value ){
             if($value=="")  //echo json_encode(["messenger"=>"thêm user thất bại"]);
             return ["result"=> 0 ,"messenger"=>"thêm user thất bại, thiếu thông tin"];
         }
+        
         if($this->InsertData("user",$user))
             return ["result"=> 1 ,"messenger"=>"Thêm user thành công"];
          else 
@@ -91,11 +86,11 @@ class userModel extends DB{
         $user=$this->getuser();
         unset($user["ID"]);
         foreach ($user as $key => $value ){
-            if($value=="")  //echo json_encode(["messenger"=>"thêm user thất bại"]);
+            if($value=="")  
                 unset($user[$key]);
         }
         if($this->Role==0) $user["Role"]=$this->Role;
-        //return $this->UpdateData("user",$this->ID,$user);
+        
         if(empty($this->getAllUser(["ID"=>$this->ID]))) 
             return ["result"=> 0 ,"messenger"=>"user Không tồn tại"];
         else if($this->UpdateData("user",$this->ID,$user))
@@ -114,6 +109,4 @@ class userModel extends DB{
                 return ["result"=> 0 ,"messenger"=>"Xóa user thất bại"];;
     }
 }
-//$test = new user();
-//print_r($test->getuser());
 ?>

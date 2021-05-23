@@ -48,7 +48,7 @@ class DB{
     public function SeclectData($tableName,$colum="*",$where=""){
          $sql="SELECT $colum FROM $tableName
                     $where";
-         //echo $sql;
+         
          $this->execute($sql);
          return $this->getAllData();
     }
@@ -65,7 +65,7 @@ class DB{
         }
         $sql="INSERT INTO $tableName ($keysql)
                 VALUES ($valuesql)";
-        //echo $sql;
+        
         return $this->execute($sql);
     }
     public function UpdateData($tableName,$id,$data = []){
@@ -79,14 +79,14 @@ class DB{
         $sql="Update $tableName
         Set $updateQuery
         Where ID=$id";
-        //echo $sql;
+        
         return ($this->execute($sql));
     }
     public function DeleteData($tableName,$id){
         
         $sql="DELETE FROM $tableName
         Where ID=$id";
-        //echo $sql;
+        
        return ($this->execute($sql)) ;
     }
 }
