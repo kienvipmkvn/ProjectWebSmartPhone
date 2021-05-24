@@ -1,0 +1,64 @@
+BRAND :
+
+Lấy danh sách brand:
+	method : GET
+    url:../web_api/api/brand/read.php    // lấy tất cả danh sách
+	url:../web_api/api/brand/show.php   // lấy theo id
+	vd :../web_api/api/brand/show.php?id=1
+thêm brand:
+	[POST] ../web_api/api/brand/add.php
+	post fields body : json :
+		{
+			"Name":"Name",
+			"Detail":"Detail"
+		}
+sửa brand:
+	[PUT] ../web_api/api/brand/update.php
+	post fields body : json :
+		{
+            "ID":"ID",
+			"Name":"newName",
+			"Detail":"newDetail"
+		}
+xóa brand:
+	[DELETE] ../web_api/api/brand/delete.php
+    post fields body : json :
+        {
+            "ID":"ID"
+        }	
+
+
+PRODUCT
+
+Lấy danh sách product:
+	method : GET
+    url:../web_api/api/product/read.php     // lấy tất cả danh sách
+	url:../web_api/api/product/show.php     // lấy theo id
+	vd :../web_api/api/product/show.php?id=1
+thêm product:
+	[POST] ../web_api/api/product/add.php
+	post fields body : json :
+		{
+			"Name":"Name",
+			"Detail":"Detail",
+            "Price" : Price,
+            "ImageLink" : "ImageLink",
+            "BrandID" : "BrandID"
+		}
+sửa product:
+	[PUT] ../web_api/api/product/update.php
+	post fields body : json :
+		{
+            "ID":"ID",
+			"Name":"newName",
+			"Detail":"newDetail",
+            "Price" : newPrice,
+            "ImageLink" : "newImageLink",
+            "BrandID" : "newBrandID"
+		}
+xóa product:
+	[DELETE] ../web_api/api/product/delete.php
+    post fields body : json :
+        {
+            "ID":"ID"
+        }	
