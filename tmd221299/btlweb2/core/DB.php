@@ -7,26 +7,42 @@ class DB{
     public $dbname = "btlweb";
     public $result=NULL;
     public function __construct(){
-        $this->con= mysqli_connect($this->servername, $this->username, $this->password);
-        mysqli_select_db($this->con,$this->dbname);
-        mysqli_query($this->con,"SET NAMES 'utf-8'" );
+        try{
+            $this->conn = new PDO("mysql:host=".$this->servername.";dbname=".$this->dbname.";charset=utf8", $this->username, $this->password);
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            //echo "ket noi thanh cong";
+        }
+        catch(PDOException $e){
+            echo "ket noi that bai " . $e->getMessage();
+        }
+        return $this->conn;
     }
     
     public function __destruct(){
-        mysqli_close($this->con);
+        $this->con=NULL;
+        $this->result=NULL;
     }
     public function connect(){
-        $this->con= mysqli_connect($this->servername, $this->username, $this->password);
-        mysqli_select_db($this->con,$this->dbname);
-        mysqli_query($this->con,"SET NAMES 'utf-8'" );
+        try{
+            $this->conn = new PDO("mysql:host=".$this->servername.";dbname=".$this->dbname.";charset=utf8", $this->username, $this->password);
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            //echo "ket noi thanh cong";
+        }
+        catch(PDOException $e){
+            echo "ket noi that bai " . $e->getMessage();
+        }
+        return $this->conn;
     }
     public function execute($sql){
-        $this->result=mysqli_query($this->con,$sql );
+        $stmt = $this->conn->prepare($sql);
+        
+        $stmt->execute();
+        $this->result=$stmt;
         return $this->result;
     }
     public function getData(){
         if($this->result){
-            $data= mysqli_fetch_array($this->result);
+            $data= $this->result->fetchAll(\PDO::FETCH_ASSOC);
         }else{
             $data=0;
         }
@@ -38,7 +54,7 @@ class DB{
         if(!$this->result){
             return [];
         }else{
-            while ($row = $this->result->fetch_assoc()) {
+            while ($row = $this->result->fetch(PDO::FETCH_ASSOC)) {
                 $data[]=$row;
             }
         }
