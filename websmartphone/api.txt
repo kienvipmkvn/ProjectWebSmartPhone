@@ -1,0 +1,94 @@
+Lấy danh sách user:
+	method : GET
+	url:localhost/websmartphone/api/user/user.php
+	vd :localhost/websmartphone/api/user/user.php?Name=adm
+thêm user:
+	[POST] localhost/websmartphone/api/user/user.php
+	post fields body : json :
+		{
+			"Name":"Name",
+			"Username":"username",
+			"Password":"pass",
+			"Email":"email@gmail.com",
+			"Phone":"0123456789",
+			"Role":1 
+		}// với admin có role =1; với user có role =0;
+sửa user:
+	[PUT] localhost/websmartphone/api/user/user.php?id=$id
+	post fields body : json :
+		{
+			"Name":"newName",
+			"Username":"newusername",
+			"Password":"newpass",
+			"Email":"newemail@gmail.com",
+			"Phone":"456789012",
+			"Role":0 
+		}// với admin có role =1; với user có role =0;
+xóa user:
+	[DELETE] localhost/websmartphone/api/user/user.php?id=$id			
+
+
+BRAND :
+
+Lấy danh sách brand:
+	method : GET
+    url:localhost/websmartphone/api/brand/read.php    // lấy tất cả danh sách
+	url:localhost/websmartphone/api/brand/show.php   // lấy theo id
+	vd :localhost/websmartphone/api/brand/show.php?id=1
+thêm brand:
+	[POST] localhost/websmartphone/api/brand/add.php
+	post fields body : json :
+		{
+			"Name":"Name",
+			"Detail":"Detail"
+		}
+sửa brand:
+	[PUT] localhost/websmartphone/api/brand/update.php
+	post fields body : json :
+		{
+            "ID":"ID",
+			"Name":"newName",
+			"Detail":"newDetail"
+		}
+xóa brand:
+	[DELETE] localhost/websmartphone/api/brand/delete.php
+    post fields body : json :
+        {
+            "ID":"ID"
+        }	
+
+
+PRODUCT
+
+Lấy danh sách product:
+	method : GET
+    url:localhost/websmartphone/api/product/read.php     // lấy tất cả danh sách
+	url:localhost/websmartphone/api/product/show.php     // lấy theo id
+	vd :localhost/websmartphone/api/product/show.php?id=1
+thêm product:
+	[POST] localhost/websmartphone/api/product/add.php
+	post fields body : json :
+		{
+			"Name":"Name",
+			"Detail":"Detail",
+            "Price" : Price,
+            "ImageLink" : "ImageLink",
+            "BrandID" : "BrandID"
+		}
+sửa product:
+	[PUT] localhost/websmartphone/api/product/update.php
+	post fields body : json :
+		{
+            "ID":"ID",
+			"Name":"newName",
+			"Detail":"newDetail",
+            "Price" : newPrice,
+            "ImageLink" : "newImageLink",
+            "BrandID" : "newBrandID"
+		}
+xóa product:
+	[DELETE] localhost/websmartphone/api/product/delete.php
+    post fields body : json :
+        {
+            "ID":"ID"
+        }	

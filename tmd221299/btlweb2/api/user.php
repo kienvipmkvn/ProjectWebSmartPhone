@@ -3,7 +3,7 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: OPTIONS,GET,POST,PUT,DELETE");
 
-    $root=$_SERVER['DOCUMENT_ROOT']."/btlweb2";
+    $root=$_SERVER['DOCUMENT_ROOT']."/websmartphone";
     include_once "$root/controller/User.php";
     
     class userapi{
