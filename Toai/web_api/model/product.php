@@ -25,7 +25,7 @@
         }
 
         public function sbrand(){
-            $query = "SELECT product.* FROM product,brand where product.BrandID=brand.ID and brand.Name like :Name";
+            $query = "SELECT product.*,brand.Name as BrandName FROM product,brand where product.BrandID=brand.ID and brand.Name like :Name";
 
             $stmt = $this->conn->prepare($query);
             $this->Name = htmlspecialchars(strip_tags($this->Name));
