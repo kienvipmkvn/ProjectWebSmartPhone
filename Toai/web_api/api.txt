@@ -2,9 +2,9 @@ BRAND :
 
 Lấy danh sách brand:
 	method : GET
-    url:../web_api/api/brand/read.php    // lấy tất cả danh sách
-	url:../web_api/api/brand/show.php   // lấy theo id
-	vd :../web_api/api/brand/show.php?id=1
+    	url:../web_api/api/brand/read.php    // lấy tất cả danh sách
+	url:../web_api/api/brand/show.php?id=1   // lấy theo id
+	
 thêm brand:
 	[POST] ../web_api/api/brand/add.php
 	post fields body : json :
@@ -32,9 +32,11 @@ PRODUCT
 
 Lấy danh sách product:
 	method : GET
-    url:../web_api/api/product/read.php     // lấy tất cả danh sách
-	url:../web_api/api/product/show.php     // lấy theo id
-	vd :../web_api/api/product/show.php?id=1
+    	url:../web_api/api/product/read.php?id=page     // lấy danh sách theo từng trang với 10 phần tử. VD page=1 thì lấy 10 phần tử đầu tiên của database
+	url:../web_api/api/product/show.php?id=1     // lấy theo id
+	url:../web_api/api/product/search?name=name  // tìm kiếm product dựa theo từ khóa, ví dụ: từ khóa iphon ->> tìm ra các product có tên iphone 5s, 6s v.v..
+	url:../web_api/api/product/sbrand.php?name=name // lấy ra các product dựa theo từ khóa tên của brand. ví dụ từ khóa black ->> blackberry.
+	
 thêm product:
 	[POST] ../web_api/api/product/add.php
 	post fields body : json :
