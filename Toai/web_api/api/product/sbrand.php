@@ -28,7 +28,8 @@
                 'Detail' => $Detail,
                 'Price' => $Price,
                 'Image' => $ImageLink,
-                'BrandID' => $BrandID
+                'BrandID' => $BrandID,
+                'BrandName' => $BrandName
             );
             array_push($product_array['data'], $product_item);
         }
