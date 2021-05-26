@@ -26,3 +26,16 @@ sửa user:
 		}// với admin có role =1; với user có role =0;
 xóa user:
 	[DELETE] ../btlweb2/api/user.php?id=$id			
+login:
+	[POST] ../btlweb2/api/login.php
+	post fields body : json :
+		{
+			"Phone":"0123456789",			
+			"Password":"pass"	
+		}
+	json trả về khi đăng nhập thành công :
+		{
+			"result": 1,
+			"messenger": "đăng nhập thành công",
+			"Authorization": "MDEyMzQ1Njc4OTphZG1pbg=="
+		}

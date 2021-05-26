@@ -40,20 +40,18 @@ class userModel extends DB{
                 unset($data[$key]);
         }
         
+        
         if(!empty($data)){
             $where = "WHERE ";
-            if(isset($data["ID"]))
-                $where=$where."ID=\"".$data["ID"]."\"";
-            if(isset($data["Role"]))
-                $where=$where."Role=\"".$data["Role"]."\"";
-            if(isset($data["Name"]))
-                $where=$where."Name LIKE \"%".$data["Name"]."%\"";
-            if(isset($data["Email"]))
-                $where=$where."Email LIKE \"%".$data["Email"]."%\"";
-            if(isset($data["Phone"]))
-                $where=$where."Phone LIKE \"%".$data["Phone"]."%\"";
-            if(isset($data["Address"]))
-                $where=$where."Address LIKE \"%".$data["Address"]."%\"";
+            foreach ($data as $key => $value){
+                if($key=="ID")
+                    $where=$where."$key = \"$value\"";
+                else 
+                    $where=$where."$key LIKE \"%".$value."%\"";
+                if(strcmp(next($data),"")) {
+                    $where=$where." AND ";
+                }
+            }
 
         }
         
@@ -75,8 +73,9 @@ class userModel extends DB{
             if($value=="")  //echo json_encode(["messenger"=>"thêm user thất bại"]);
             return ["result"=> 0 ,"messenger"=>"thêm user thất bại, thiếu thông tin"];
         }
-        
-        if($this->InsertData("user",$user))
+        if(!empty($this->getAllUser(["Phone"=>$this->Phone]))){
+            return ["result"=> 0 ,"messenger"=>"thêm user thất bại, số điện thoại đã sử dụng"];
+        }else if($this->InsertData("user",$user))
             return ["result"=> 1 ,"messenger"=>"Thêm user thành công"];
          else 
              return ["result"=> 0 ,"messenger"=>"Thêm user thất bại"];;

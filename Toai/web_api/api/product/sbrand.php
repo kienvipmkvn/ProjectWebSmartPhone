@@ -9,10 +9,9 @@
     $connect = $dtb->connect();
 
     $product = new product($connect);
-    $product->ID = isset($_GET['id']) ? $_GET['id'] : die();
-    $product->ID = ($product->ID-1)*10;
+    $product->Name = isset($_GET['name']) ? $_GET['name'] : die();
 
-    $read = $product->read();
+    $read = $product->sbrand();
 
     $num = $read->rowCount();
 
@@ -29,11 +28,13 @@
                 'Detail' => $Detail,
                 'Price' => $Price,
                 'Image' => $ImageLink,
-                'BrandID' => $BrandID
+                'BrandID' => $BrandID,
+                'BrandName' => $BrandName
             );
             array_push($product_array['data'], $product_item);
         }
         echo json_encode($product_array);
     }
+    // else echo "khong tim thay ket qua";
 
 ?>

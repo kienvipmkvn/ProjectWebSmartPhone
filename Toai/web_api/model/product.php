@@ -14,9 +14,35 @@
         }
 
         public function read(){
-            $query = "SELECT * FROM product ORDER BY ID DESC";
+            $query = "SELECT * FROM product limit $this->ID,10";
 
             $stmt = $this->conn->prepare($query);
+            
+            // $stmt->bindParam('?', $this->ID);
+
+            $stmt->execute();
+            return $stmt;
+        }
+
+        public function sbrand(){
+            $query = "SELECT product.*,brand.Name as BrandName FROM product,brand where product.BrandID=brand.ID and brand.Name like :Name";
+
+            $stmt = $this->conn->prepare($query);
+            $this->Name = htmlspecialchars(strip_tags($this->Name));
+            $data = '%'.$this->Name.'%';
+            $stmt->bindParam(':Name', $data);
+
+            $stmt->execute();
+            return $stmt;
+        }
+
+        public function search(){
+            $query = "SELECT * FROM product where Name like :Name";
+
+            $stmt = $this->conn->prepare($query);
+            $this->Name = htmlspecialchars(strip_tags($this->Name));
+            $data = '%'.$this->Name.'%';
+            $stmt->bindParam(':Name', $data);
 
             $stmt->execute();
             return $stmt;
