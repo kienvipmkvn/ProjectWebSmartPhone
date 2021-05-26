@@ -9,9 +9,11 @@
     $connect = $dtb->connect();
 
     $product = new product($connect);
-    $product->Name = isset($_GET['name']) ? $_GET['name'] : die();
+    $page = isset($_GET['page']) ? $_GET['page'] : die();
+    $size = isset($_GET['size']) ? $_GET['size'] : die();
+    $name = isset($_GET['name']) ? $_GET['name'] : die();
 
-    $read = $product->search();
+    $read = $product->search($page, $size, $name);
 
     $num = $read->rowCount();
 
