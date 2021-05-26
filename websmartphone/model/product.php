@@ -13,10 +13,12 @@
             $this->conn = $db;
         }
 
-        public function read(){
-            $query = "SELECT * FROM product limit $this->ID,10";
+        public function read($Id, $size){
+            $query = "SELECT * FROM product limit $Id,$size";
 
             $stmt = $this->conn->prepare($query);
+            
+            // $stmt->bindParam('?', $this->ID);
 
             $stmt->execute();
             return $stmt;
@@ -34,12 +36,12 @@
             return $stmt;
         }
 
-        public function search(){
-            $query = "SELECT * FROM product where Name like :Name";
+        public function search($page, $size, $name, $brandID){
+            $page = ($page-1)*$size;
+            $query = "SELECT product.*, brand.Name as BrandName FROM product,brand where product.BrandID=brand.ID and product.Name like :Name and brand.ID = $brandID limit $page,$size";
 
             $stmt = $this->conn->prepare($query);
-            $this->Name = htmlspecialchars(strip_tags($this->Name));
-            $data = '%'.$this->Name.'%';
+            $data = '%'.$name.'%';
             $stmt->bindParam(':Name', $data);
 
             $stmt->execute();
