@@ -1,3 +1,46 @@
+Lấy danh sách user:
+	method : GET
+	url:localhost/websmartphone/api/user/user.php
+	vd :localhost/websmartphone/api/user/user.php?Name=adm
+thêm user:
+	[POST] localhost/websmartphone/api/user/user.php
+	post fields body : json :
+		{
+			"Name":"Name",
+			"Username":"username",
+			"Password":"pass",
+			"Email":"email@gmail.com",
+			"Phone":"0123456789",
+			"Role":1 
+		}// với admin có role =1; với user có role =0;
+sửa user:
+	[PUT] localhost/websmartphone/api/user/user.php?id=$id
+	post fields body : json :
+		{
+			"Name":"newName",
+			"Username":"newusername",
+			"Password":"newpass",
+			"Email":"newemail@gmail.com",
+			"Phone":"456789012",
+			"Role":0 
+		}// với admin có role =1; với user có role =0;
+xóa user:
+	[DELETE] localhost/websmartphone/api/user/user.php?id=$id			
+login:
+	[POST] localhost/websmartphone/api/user/login.php
+	post fields body : json :
+		{
+			"Phone":"0123456789",			
+			"Password":"pass"	
+		}
+	json trả về khi đăng nhập thành công :
+		{
+			"result": 1,
+			"messenger": "đăng nhập thành công",
+			"Authorization": "MDEyMzQ1Njc4OTphZG1pbg=="
+		}
+
+
 BRAND :
 
 Lấy danh sách brand:
@@ -100,10 +143,28 @@ ORDERS
 
 Lấy danh sách orders:
 	method : GET
-    url:localhost/websmartphone/api/orders/read.php?id=page   // lấy danh sách theo từng trang với 10 phần tử. VD page=1 thì lấy 10 phần tử đầu tiên của database
-	url:localhost/websmartphone/api/orders/show.php?id=1     // lấy theo id
-	url:localhost/websmartphone/api/orders/namesearch.php?name=name  // tìm kiếm orders dựa theo name, ví dụ: name là minh ->> tìm ra các orders có tên minh, van minh v.v..
-	url:localhost/websmartphone/api/orders/statussearch.php?name=status // lấy ra các orders dựa theo status của orders. ví dụ từ khóa xac nhan ->> tìm ra các orders có status xac nhan.
+
+	/* 
+	* lấy danh sách theo từng trang.
+	* pageIndex là vị trí trang mặc định là 1
+	* pageSize là số phần tử trong trang mặc định là 1
+	*?
+	url:localhost/websmartphone/api/orders/read.php
+    VD: url:localhost/websmartphone/api/orders/read.php?pageIndex=1&pageSize=5 
+
+	// lấy theo id
+	url:localhost/websmartphone/api/orders/show.php
+	VD: localhost/websmartphone/api/orders/show.php?id=1    
+
+	/* 
+	* Tìm kiếm theo name và status
+	* pageIndex là vị trí trang mặc định là 1
+	* pageSize là số phần tử trong trang mặc định là 1
+	* name là tên muốn tìm mặc định là null
+	* status là trạng thái muốn tìm mặc định là null
+	*?
+	url:localhost/websmartphone/api/orders/search.php
+	VD: localhost/websmartphone/api/orders/search.php?pageIndex=1&pageSize=5&name=minh&status=xac
 	
 thêm orders:
 	[POST] localhost/websmartphone/api/orders/add.php
@@ -114,8 +175,7 @@ thêm orders:
 			"UserAddress": "newUserAddress",
 			"UserID": "newUserID",
 			"Amount": "newAmount",
-			"Note": "newNote",
-			"Status": "newStatus"
+			"Note": "newNote"
 		}
 sửa orders:
 	[PUT] localhost/websmartphone/api/orders/update.php
@@ -127,8 +187,7 @@ sửa orders:
 			"UserAddress": "newUserAddress",
 			"UserID": "newUserID",
 			"Amount": "newAmount",
-			"Note": "newNote",
-			"Status": "newStatus"
+			"Note": "newNote"
 		}
 xóa orders:
 	[DELETE] localhost/websmartphone/api/orders/delete.php

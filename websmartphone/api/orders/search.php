@@ -9,9 +9,13 @@
     $connect = $dtb->connect();
 
     $orders = new orders($connect);
-    $orders->Name = isset($_GET['name']) ? $_GET['name'] : die();
+    $orders->Name = isset($_GET['name']) ? $_GET['name'] : null;
+    $orders->Status = isset($_GET['status']) ? $_GET['status'] : null;
+    $pageIndex = isset($_GET['pageIndex']) ? $_GET['pageIndex'] : 1;
+    $pageSize = isset($_GET['pageSize']) ? $_GET['pageSize'] : 1;
+    $pageIndex = ($pageIndex-1)*$pageSize;
 
-    $read = $orders->namesearch();
+    $read = $orders->search($pageIndex, $pageSize);
 
     $num = $read->rowCount();
 

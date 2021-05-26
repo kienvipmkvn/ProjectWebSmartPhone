@@ -15,8 +15,8 @@
             $this->conn = $db;
         }
 
-        public function read(){
-            $query = "SELECT * FROM orders limit $this->ID,10";
+        public function read($pageIndex, $pageSize){
+            $query = "SELECT * FROM orders limit $pageIndex,$pageSize";
 
             $stmt = $this->conn->prepare($query);
 
@@ -42,29 +42,21 @@
             return $stmt;
         }
 
-        public function namesearch(){
-            $query = "SELECT * FROM orders where Name like :Name";
+        public function search($pageIndex, $pageSize){
+            $query = "SELECT * FROM orders where Name like :Name and Status like :Status limit $pageIndex,$pageSize";
 
             $stmt = $this->conn->prepare($query);
             $this->Name = htmlspecialchars(strip_tags($this->Name));
-            $data = '%'.$this->Name.'%';
-            $stmt->bindParam(':Name', $data);
+            $this->Status = htmlspecialchars(strip_tags($this->Status));
+            $data1 = '%'.$this->Name.'%';
+            $data2 = '%'.$this->Status.'%';
+            $stmt->bindParam(':Name', $data1);
+            $stmt->bindParam(':Status', $data2);
 
             $stmt->execute();
             return $stmt;
         }
-
-        public function statussearch(){
-            $query = "SELECT orders.* FROM orders where orders.Status like :Name";
-
-            $stmt = $this->conn->prepare($query);
-            $this->Name = htmlspecialchars(strip_tags($this->Name));
-            $data = '%'.$this->Name.'%';
-            $stmt->bindParam(':Name', $data);
-
-            $stmt->execute();
-            return $stmt;
-        }
+        
 
         public function add(){
             $query = "INSERT INTO orders SET Name=:Name , UserPhone=:UserPhone , UserAddress=:UserAddress , UserID=:UserID , Amount=:Amount , Note=:Note , Status=:Status";
