@@ -3,7 +3,7 @@ class DB{
     
     private $servername = "localhost";
     private $username = "root";
-    private $password = "";
+    private $password = "123456";
     private $dbname = "btlweb";
     private $result=NULL;
     
@@ -21,4 +21,4 @@ class DB{
     }
     
 }
-?>
+?> 
