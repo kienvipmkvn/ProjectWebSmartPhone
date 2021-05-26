@@ -20,7 +20,8 @@
         'UserAddress' => $orders->UserAddress,
         'UserID' => $orders->UserID,
         'Amount' => $orders->Amount,
-        'Note' => $orders->Note
+        'Note' => $orders->Note,
+        'Status' => $orders->Status,
     );
 
     print_r(json_encode($orders_item));

@@ -52,6 +52,7 @@ CREATE TABLE `orders` (
   `UserID` int(11) UNSIGNED DEFAULT NULL,
   `Amount` decimal(15,4) UNSIGNED NOT NULL,
   `Note` text DEFAULT NULL,
+  `Status` text NOT NULL
   `CreatedTime` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

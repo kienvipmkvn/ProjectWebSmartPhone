@@ -34,7 +34,7 @@ Lấy danh sách product:
 	method : GET
     url:localhost/websmartphone/api/product/read.php?id=page     // lấy danh sách theo từng trang với 10 phần tử. VD page=1 thì lấy 10 phần tử đầu tiên của database
 	url:localhost/websmartphone/api/product/show.php?id=1     // lấy theo id
-	url:localhost/websmartphone/api/product/search?name=name  // tìm kiếm product dựa theo từ khóa, ví dụ: từ khóa iphon ->> tìm ra các product có tên iphone 5s, 6s v.v..
+	url:localhost/websmartphone/api/product/search.php?name=name  // tìm kiếm product dựa theo từ khóa, ví dụ: từ khóa iphon ->> tìm ra các product có tên iphone 5s, 6s v.v..
 	url:localhost/websmartphone/api/product/sbrand.php?name=name // lấy ra các product dựa theo từ khóa tên của brand. ví dụ từ khóa black ->> blackberry.
 	
 thêm product:
@@ -102,6 +102,8 @@ Lấy danh sách orders:
 	method : GET
     url:localhost/websmartphone/api/orders/read.php?id=page   // lấy danh sách theo từng trang với 10 phần tử. VD page=1 thì lấy 10 phần tử đầu tiên của database
 	url:localhost/websmartphone/api/orders/show.php?id=1     // lấy theo id
+	url:localhost/websmartphone/api/orders/namesearch.php?name=name  // tìm kiếm orders dựa theo name, ví dụ: name là minh ->> tìm ra các orders có tên minh, van minh v.v..
+	url:localhost/websmartphone/api/orders/statussearch.php?name=status // lấy ra các orders dựa theo status của orders. ví dụ từ khóa xac nhan ->> tìm ra các orders có status xac nhan.
 	
 thêm orders:
 	[POST] localhost/websmartphone/api/orders/add.php
@@ -112,7 +114,8 @@ thêm orders:
 			"UserAddress": "newUserAddress",
 			"UserID": "newUserID",
 			"Amount": "newAmount",
-			"Note": "newNote"
+			"Note": "newNote",
+			"Status": "newStatus"
 		}
 sửa orders:
 	[PUT] localhost/websmartphone/api/orders/update.php
@@ -124,7 +127,8 @@ sửa orders:
 			"UserAddress": "newUserAddress",
 			"UserID": "newUserID",
 			"Amount": "newAmount",
-			"Note": "newNote"
+			"Note": "newNote",
+			"Status": "newStatus"
 		}
 xóa orders:
 	[DELETE] localhost/websmartphone/api/orders/delete.php

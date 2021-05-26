@@ -9,21 +9,20 @@
     $connect = $dtb->connect();
 
     $orders = new orders($connect);
-    $orders->ID = isset($_GET['id']) ? $_GET['id'] : die();
-    $orders->ID = ($orders->ID-1)*10;
+    $orders->Name = isset($_GET['name']) ? $_GET['name'] : die();
 
-    $read = $orders->read();
+    $read = $orders->statussearch();
 
     $num = $read->rowCount();
 
     if($num > 0){
-        $order_array = [];
-        $order_array['data'] = [];
+        $orders_array = [];
+        $orders_array['data'] = [];
 
         while($row = $read->fetch(PDO::FETCH_ASSOC)){
             extract($row);
 
-            $order_item = array(
+            $orders_item = array(
                 'ID' => $ID,
                 'Name' => $Name,
                 'UserPhone' => $UserPhone,
@@ -33,9 +32,9 @@
                 'Note' => $Note,
                 'Status' => $Status
             );
-            array_push($order_array['data'], $order_item);
+            array_push($orders_array['data'], $orders_item);
         }
-        echo json_encode($order_array);
+        echo json_encode($orders_array);
     }
 
 ?>

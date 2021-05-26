@@ -20,6 +20,7 @@ $orders->UserAddress = $data->UserAddress;
 $orders->UserID = $data->UserID;
 $orders->Amount = $data->Amount;
 $orders->Note = $data->Note;
+$orders->Status = $data->Status;
 
 if ($orders->add()) {
     echo json_encode(array('status', 'success'));
