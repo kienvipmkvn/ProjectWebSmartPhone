@@ -5,22 +5,22 @@
     header("Access-Control-Allow-Headers:Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods,Authorization,X-Request-With");
 
     include_once('../../config/db.php');
-    include_once('../../model/product.php');
+    include_once('../../model/orderdetail.php');
 
     $db = new db();
     $connect = $db->connect();
 
-    $product = new product($connect);
+    $orderdetail = new orderdetail($connect);
 
     $data = json_decode(file_get_contents("php://input"));
 
-    $product->ID = $data->ID;
+    $orderdetail->ID = $data->ID;
     
 
-    if($product->delete()){
-        echo json_encode(array('message','xoa thanh cong'));
+    if($orderdetail->delete()){
+        echo json_encode(array('status','success'));
     }else{
-        echo json_encode(array('message', 'xoa that bai'));
+        echo json_encode(array('status', 'failed'));
     }
 
 ?>

@@ -9,10 +9,9 @@
     $connect = $dtb->connect();
 
     $product = new product($connect);
-    $product->ID = isset($_GET['id']) ? $_GET['id'] : die();
-    $product->ID = ($product->ID-1)*10;
+    $product->Name = isset($_GET['name']) ? $_GET['name'] : die();
 
-    $read = $product->read();
+    $read = $product->search();
 
     $num = $read->rowCount();
 
@@ -35,5 +34,6 @@
         }
         echo json_encode($product_array);
     }
+    // else echo "khong tim thay ket qua";
 
 ?>

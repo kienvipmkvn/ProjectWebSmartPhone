@@ -21,9 +21,9 @@ $product->ImageLink = $data->Image;
 $product->BrandID = $data->BrandID;
 
 if ($product->add()) {
-    echo json_encode(array('status', 'success'));
+    echo json_encode(array('message', 'Add thanh cong'));
 } else {
-    echo json_encode(array('status', 'failed'));
+    echo json_encode(array('message', 'Add that bai'));
 }
 
 ?>

@@ -16,7 +16,7 @@
     $brand_item = array(
         'ID' => $brand->ID,
         'Name' => $brand->Name,
-        'Detail' => $brand->Detail
+        'Detail' => $brand->Detail,
     );
 
     print_r(json_encode($brand_item));

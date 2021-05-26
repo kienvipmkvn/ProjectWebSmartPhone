@@ -5,26 +5,24 @@
     header("Access-Control-Allow-Headers:Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods,Authorization,X-Request-With");
 
     include_once('../../config/db.php');
-    include_once('../../model/product.php');
+    include_once('../../model/orderdetail.php');
 
     $db = new db();
     $connect = $db->connect();
 
-    $product = new product($connect);
+    $orderdetail = new orderdetail($connect);
 
     $data = json_decode(file_get_contents("php://input"));
 
-    $product->ID = $data->ID;
-    $product->Name = $data->Name;
-    $product->Detail = $data->Detail;
-    $product->Price = $data->Price;
-    $product->ImageLink = $data->Image;
-    $product->BrandID = $data->BrandID;
+    $orderdetail->ID = $data->ID;
+    $orderdetail->OrderID = $data->OrderID;
+    $orderdetail->ProductID = $data->ProductID;
+    $orderdetail->Quantity = $data->Quantity;
 
-    if($product->update()){
-        echo json_encode(array('message','update thanh cong'));
+    if($orderdetail->update()){
+        echo json_encode(array('status','success'));
     }else{
-        echo json_encode(array('message', 'update that bai'));
+        echo json_encode(array('status', 'failed'));
     }
 
 ?>
