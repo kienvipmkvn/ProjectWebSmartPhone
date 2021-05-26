@@ -9,10 +9,11 @@
     $connect = $dtb->connect();
 
     $orders = new orders($connect);
-    $orders->ID = isset($_GET['id']) ? $_GET['id'] : die();
-    $orders->ID = ($orders->ID-1)*10;
+    $pageIndex = isset($_GET['pageIndex']) ? $_GET['pageIndex'] : 1;
+    $pageSize = isset($_GET['pageSize']) ? $_GET['pageSize'] : 1;
+    $pageIndex = ($pageIndex-1)*$pageSize;
 
-    $read = $orders->read();
+    $read = $orders->read($pageIndex, $pageSize);
 
     $num = $read->rowCount();
 
