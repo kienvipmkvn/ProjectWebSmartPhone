@@ -5,7 +5,7 @@
         public $Name;
         public $UserPhone;
         public $UserAddress;
-        public $UserID;
+        public $Guid;
         public $Amount;
         public $Note;
         public $Status;
@@ -34,10 +34,10 @@
             $this->Name = $row['Name'];
             $this->UserPhone = $row['UserPhone'];
             $this->UserAddress = $row['UserAddress'];
-            $this->UserID = $row['UserID'];
             $this->Amount = $row['Amount'];
             $this->Note = $row['Note'];
             $this->Status = $row['Status'];
+            $this->Guid = $row['Guid'];
 
             return $stmt;
         }
@@ -56,38 +56,54 @@
             $stmt->execute();
             return $stmt;
         }
-        
+
+        function getGUID(){
+            if (function_exists('com_create_guid')){
+                return com_create_guid();
+            }else{
+                mt_srand((double)microtime()*10000);
+                $charid = strtoupper(md5(uniqid(rand(), true)));
+                $hyphen = chr(45);
+                $uuid = substr($charid, 0, 8).$hyphen
+                    .substr($charid, 8, 4).$hyphen
+                    .substr($charid,12, 4).$hyphen
+                    .substr($charid,16, 4).$hyphen
+                    .substr($charid,20,12);
+                return $uuid;
+            }
+        }
 
         public function add(){
-            $query = "INSERT INTO orders SET Name=:Name , UserPhone=:UserPhone , UserAddress=:UserAddress , UserID=:UserID , Amount=:Amount , Note=:Note , Status=:Status";
+            $query = "INSERT INTO orders SET Name=:Name , UserPhone=:UserPhone , UserAddress=:UserAddress , Amount=:Amount, Guid=:Guid , Note=:Note , Status=:Status";
 
             $stmt = $this->conn->prepare($query);
 
             $this->Name = htmlspecialchars(strip_tags($this->Name));
             $this->UserPhone = htmlspecialchars(strip_tags($this->UserPhone));
             $this->UserAddress = htmlspecialchars(strip_tags($this->UserAddress));
-            $this->UserID = htmlspecialchars(strip_tags($this->UserID));
             $this->Amount = htmlspecialchars(strip_tags($this->Amount));
             $this->Note = htmlspecialchars(strip_tags($this->Note));
             $this->Status = htmlspecialchars(strip_tags($this->Status));
+            $this->Guid = $this->getGUID();
 
             $stmt->bindParam(':Name', $this->Name);
             $stmt->bindParam(':UserPhone', $this->UserPhone);
             $stmt->bindParam(':UserAddress', $this->UserAddress);
-            $stmt->bindParam(':UserID', $this->UserID);
             $stmt->bindParam(':Amount', $this->Amount);
             $stmt->bindParam(':Note', $this->Note);
             $stmt->bindParam(':Status', $this->Status);
+            $stmt->bindParam(':Guid', $this->Guid);
 
-            if($stmt->execute()){
-                return true;
+            $result = $stmt->execute();
+            if($result){
+                return $this->Guid;
             }
             printf("Error %s.\n" .$stmt->error);
             return false;
         }
 
         public function update(){
-            $query = "UPDATE orders SET Name=:Name , UserPhone=:UserPhone , UserAddress=:UserAddress , UserID=:UserID , Amount=:Amount , Note=:Note , Status=:Status WHERE ID=:ID";
+            $query = "UPDATE orders SET Name=:Name , UserPhone=:UserPhone , UserAddress=:UserAddress, Amount=:Amount , Note=:Note , Status=:Status WHERE ID=:ID";
 
             $stmt = $this->conn->prepare($query);
 
@@ -95,19 +111,19 @@
             $this->Name = htmlspecialchars(strip_tags($this->Name));
             $this->UserPhone = htmlspecialchars(strip_tags($this->UserPhone));
             $this->UserAddress = htmlspecialchars(strip_tags($this->UserAddress));
-            $this->UserID = htmlspecialchars(strip_tags($this->UserID));
             $this->Amount = htmlspecialchars(strip_tags($this->Amount));
             $this->Note = htmlspecialchars(strip_tags($this->Note));
             $this->Status = htmlspecialchars(strip_tags($this->Status));
+            $this->Guid = htmlspecialchars(strip_tags($this->Guid));
 
             $stmt->bindParam(':ID', $this->ID);
             $stmt->bindParam(':Name', $this->Name);
             $stmt->bindParam(':UserPhone', $this->UserPhone);
             $stmt->bindParam(':UserAddress', $this->UserAddress);
-            $stmt->bindParam(':UserID', $this->UserID);
             $stmt->bindParam(':Amount', $this->Amount);
             $stmt->bindParam(':Note', $this->Note);
             $stmt->bindParam(':Status', $this->Status);
+            $stmt->bindParam(':Guid', $this->Guid);
 
             if($stmt->execute()){
                 return true;

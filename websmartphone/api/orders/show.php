@@ -18,7 +18,7 @@
         'Name' => $orders->Name,
         'UserPhone' => $orders->UserPhone,
         'UserAddress' => $orders->UserAddress,
-        'UserID' => $orders->UserID,
+        'Guid' => $orders->Guid,
         'Amount' => $orders->Amount,
         'Note' => $orders->Note,
         'Status' => $orders->Status,
