@@ -6,12 +6,17 @@ const routes: Routes = [
   {
     path:'',
     component: ContainerComponent,
-    loadChildren: () => import('../../component/main-content/main-content.module').then(m => m.MainContentModule)
-  },
-  {
-    path: 'cart',
-    loadChildren: ()=>import('../../component/cart/cart.module').then(m=>m.CartModule)
-  },
+    children:[
+      {
+        path: '',
+        loadChildren: () => import('../../component/main-content/main-content.module').then(m => m.MainContentModule)
+      },
+      {
+        path: 'cart',
+        loadChildren: ()=>import('../../component/cart/cart.module').then(m=>m.CartModule)
+      },
+    ]
+  }
 ];
 
 @NgModule({

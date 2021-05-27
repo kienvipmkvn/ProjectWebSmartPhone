@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.adminService.login(this.userName, this.password).subscribe((res) => {
+      console.log(res);
       if (res) {
         this.router.navigate(['admin/list']);
       } else {

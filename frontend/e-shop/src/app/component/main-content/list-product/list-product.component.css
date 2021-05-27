@@ -32,3 +32,9 @@ li{
   height: 1px;
   width: 70%;
 }
+
+.active{
+  background: #958457;
+  padding: 2px 4px;
+  color: white;
+}

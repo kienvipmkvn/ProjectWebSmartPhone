@@ -34,9 +34,9 @@
   </div>
 
   <div *ngIf="listProduct.length > 0" class="customer flex">
-    <input type="text" placeholder="Họ tên" />
-    <input type="text" placeholder="Địa chỉ nhận hàng" />
-    <input type="text" placeholder="Số điện thoại" />
+    <input type="text" placeholder="Họ tên" [(ngModel)]="order.Name" />
+    <input type="text" placeholder="Địa chỉ nhận hàng" [(ngModel)]="order.UserAddress" />
+    <input type="text" placeholder="Số điện thoại" [(ngModel)]="order.UserPhone" />
   </div>
   <div *ngIf="listProduct.length > 0" class="buy" (click)="buy()">
     Đặt hàng ({{ cartService.totalPrice | currency: "VND" }})

@@ -11,13 +11,11 @@ export class AdminService{
   constructor(private http: HttpClient){}
 
   login(username, password){
-    const url = environment.baseUrl + environment.admin.login;
+    const url = environment.login;
 
-    return of(true);
-
-    // return this.http.post(url, {
-    //   username,
-    //   password
-    // })
+    return this.http.post(url, {
+      "Phone":username,			
+			"Password":password	
+    })
   }
 }

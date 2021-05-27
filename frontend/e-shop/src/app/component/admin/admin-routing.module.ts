@@ -16,19 +16,59 @@ const routes: Routes = [
   },
   {
     path: 'view',
-    component: ViewComponent
+    component: ViewComponent,
+    children:[
+      {
+        path: 'product',
+        component: ViewComponent
+      },
+      {
+        path: 'order',
+        component: ViewComponent
+      }
+    ]
   },
   {
     path: 'list',
-    component: ListComponent
+    component: ListComponent,
+    children:[
+      {
+        path: 'product',
+        component: ListComponent
+      },
+      {
+        path: 'order',
+        component: ListComponent
+      }
+    ]
   },
   {
     path: 'add',
-    component: EditComponent
+    component: EditComponent,
+    children:[
+      {
+        path: 'product',
+        component: EditComponent
+      },
+      {
+        path: 'order',
+        component: EditComponent
+      }
+    ]
   },
   {
     path: 'edit/:id',
-    component: EditComponent
+    component: EditComponent,
+    children:[
+      {
+        path: 'product',
+        component: EditComponent
+      },
+      {
+        path: 'order',
+        component: EditComponent
+      }
+    ]
   }
 ];
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BrandModel } from 'src/app/models/brand.model';
 import { BrandService } from 'src/app/services/brand.service';
+import { ObservableService } from 'src/app/services/observable.service';
 
 @Component({
   selector: 'app-list-product',
@@ -9,7 +10,9 @@ import { BrandService } from 'src/app/services/brand.service';
 })
 export class ListProductComponent implements OnInit {
   listBrand: BrandModel[] = [];
-  constructor(private brandService: BrandService) { }
+  active = -1;
+  constructor(private brandService: BrandService,
+    private obs: ObservableService) { }
 
   ngOnInit(): void {
     this.brandService.getAllBrand().subscribe(rs=>{
@@ -18,4 +21,14 @@ export class ListProductComponent implements OnInit {
     })
   }
 
+  filterBrand(bid){
+    if(this.active == bid){
+      this.active = -1;
+      this.obs.filterBrand.next(-1);
+    }
+    else {
+      this.active = bid;
+      this.obs.filterBrand.next(bid);
+    } 
+  }
 }

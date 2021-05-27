@@ -25,8 +25,8 @@ export class ProductService {
   // productList = [this.product, this.product2];
   constructor(private http: HttpClient) {}
 
-  getProductsPaging(pageIndex, pageSize) {
-    const url = environment.baseUrl + environment.common.product.read;
+  getProductsPaging(pageIndex, pageSize, searchKey = "", brand = -1) {
+    const url = environment.searchProduct + `?page=${pageIndex + 1}&size=${pageSize}&name=${searchKey}&bid=${brand}`;
     return this.http.get<{data:ProductModel[]}>(url);
   }
 

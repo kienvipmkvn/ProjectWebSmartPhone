@@ -7,6 +7,7 @@ import { HeaderComponent } from '../header/header.component';
 import { MainHeaderComponent } from '../main-header/main-header.component';
 import { MenuTopComponent } from '../menu-top/menu-top.component';
 import { ContainerComponent } from './container.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ContainerComponent } from './container.component';
   ],
   imports: [
     CommonModule,
-    ContainerRoutingModule
+    ContainerRoutingModule,
+    FormsModule
   ]
 })
 export class ContainerModule { }

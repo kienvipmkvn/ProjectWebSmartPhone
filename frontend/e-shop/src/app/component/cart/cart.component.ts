@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { OrderModel } from 'src/app/models/order.model';
 import { ProductModel } from 'src/app/models/product.model';
 import { CartService } from 'src/app/services/cart.service';
+import { OrderService } from 'src/app/services/order.service';
 
 @Component({
   selector: 'app-cart',
@@ -16,7 +18,9 @@ export class CartComponent implements OnInit {
   totalPrice;
   buySuccess = false;
 
-  constructor(public cartService: CartService) { }
+  order: OrderModel = new OrderModel();
+
+  constructor(public cartService: CartService, private orderService: OrderService) { }
 
   ngOnInit(): void {
     this.listProduct = this.cartService.listProduct;
@@ -36,6 +40,11 @@ export class CartComponent implements OnInit {
   }
 
   buy(){
+    this.order.Amount = this.cartService.totalPrice;
+    this.order.Status = "Đã đặt hàng"
+    this.orderService.saveOrder(this.order).subscribe(res=>{
+      console.log(res);
+    })
     this.cartService.deleteAll();
     this.listProduct = this.cartService.listProduct;
     this.buySuccess = true;
