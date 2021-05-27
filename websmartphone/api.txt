@@ -173,10 +173,12 @@ thêm orders:
 			"Name": "newName",
 			"UserPhone": "newUserPhone",
 			"UserAddress": "newUserAddress",
-			"UserID": "newUserID",
 			"Amount": "newAmount",
-			"Note": "newNote"
+			"Note": "newNote",
+			"Status": "Status"
 		}
+	return "Guid": "Giá trị của Guid"
+
 sửa orders:
 	[PUT] localhost/websmartphone/api/orders/update.php
 	post fields body : json :
@@ -187,7 +189,8 @@ sửa orders:
 			"UserAddress": "newUserAddress",
 			"UserID": "newUserID",
 			"Amount": "newAmount",
-			"Note": "newNote"
+			"Note": "newNote",
+			"Status": "Status"
 		}
 xóa orders:
 	[DELETE] localhost/websmartphone/api/orders/delete.php

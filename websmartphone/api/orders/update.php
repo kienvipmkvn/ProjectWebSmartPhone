@@ -18,7 +18,7 @@
     $orders->Name = $data->Name;
     $orders->UserPhone = $data->UserPhone;
     $orders->UserAddress = $data->UserAddress;
-    $orders->UserID = $data->UserID;
+    $orders->Guid = $data->Guid;
     $orders->Amount = $data->Amount;
     $orders->Note = $data->Note;
     $orders->Status = $data->Status;

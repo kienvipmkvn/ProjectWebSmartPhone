@@ -31,7 +31,7 @@
                 'Name' => $Name,
                 'UserPhone' => $UserPhone,
                 'UserAddress' => $UserAddress,
-                'UserID' => $UserID,
+                'Guid' => $Guid,
                 'Amount' => $Amount,
                 'Note' => $Note,
                 'Status' => $Status

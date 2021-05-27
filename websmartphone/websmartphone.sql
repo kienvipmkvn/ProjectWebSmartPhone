@@ -46,13 +46,13 @@ CREATE TABLE `orderdetail` (
 
 CREATE TABLE `orders` (
   `ID` int(10) UNSIGNED NOT NULL,
-  `Name` varchar(50) NOT NULL,
-  `UserPhone` varchar(50) NOT NULL,
-  `UserAddress` varchar(128) NOT NULL,
-  `UserID` int(11) UNSIGNED DEFAULT NULL,
-  `Amount` decimal(15,4) UNSIGNED NOT NULL,
+  `Name` varchar(50),
+  `UserPhone` varchar(50),
+  `UserAddress` varchar(128),
+  `Amount` decimal(15,4) UNSIGNED,
   `Note` text DEFAULT NULL,
-  `Status` text NOT NULL
+  `Status` text,
+  `Guid` varchar(255)
   `CreatedTime` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -107,8 +107,7 @@ ALTER TABLE `orderdetail`
 -- Chỉ mục cho bảng `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `UserID` (`UserID`);
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Chỉ mục cho bảng `product`

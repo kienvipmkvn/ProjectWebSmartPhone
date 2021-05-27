@@ -17,15 +17,17 @@ $data = json_decode(file_get_contents("php://input"));
 $orders->Name = $data->Name;
 $orders->UserPhone = $data->UserPhone;
 $orders->UserAddress = $data->UserAddress;
-$orders->UserID = $data->UserID;
 $orders->Amount = $data->Amount;
 $orders->Note = $data->Note;
 $orders->Status = $data->Status;
 
-if ($orders->add()) {
-    echo json_encode(array('status', 'success'));
+$result = $orders->add();
+$errorMess=["status"=>"faid"];
+$mess=["Guid"=>$result];
+if ($result) {
+    echo json_encode($mess,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
 } else {
-    echo json_encode(array('status', 'failed'));
+    echo json_encode($errorMess,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
 }
 
 ?>
